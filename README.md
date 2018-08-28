@@ -1,4 +1,4 @@
-Sheryl Testing 5
+Sheryl Testing 6
 # Getting Started Solution Template
 
 This page describes the project structure used to set and update a Murano Solution. Murano templates can be used in two distinct ways:
