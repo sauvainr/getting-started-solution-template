@@ -1,5 +1,7 @@
 # Getting Started Solution Template
 
+touch test 2 3 4 5
+
 This page describes the project structure used to set and update a Murano Solution. Murano templates can be used in two distinct ways:
 - To synchronize an existing Murano solution with a local project folder using the [Murano-CLI](http://docs.exosite.com/development/tools/murano-cli/).
 - To publish it as template element on the Murano Exchange marketplace to make it available from other Murano businesses. In such case the source code and repo is obfuscated for the template users. Learn more about [Murano Exchange here](http://docs.exosite.com/reference/ui/exchange/authoring-elements-guide.md).
@@ -192,28 +194,47 @@ exclude   | list | `['*_test.lua', '*_spec.lua']` | Pattern allowing to ignore f
 Selected file needs to contain valid Lua scripts used for service event handlers logic. Scripts are triggered when the relevant Murano event occurs.
 The service and event can be defined using the following Lua comment to define multiple event handlers in a single file:
 
+There is 3 ways to defines event scripts:
+
+**File based**
+
+Each file contains a unique event script.
+
+1. The file name is composed as `<service_alias>_<event_type>.lua`
+
+Example: [./services/timer_timer.lua](./services/timer_timer.lua)
+
+2. In nested folder: the parent is the service alias & the file name is the event type.
+
+Example: [./services/user/account.lua](./services/user/account.lua)
+
+**Tag based**
+
+You can also set multiple event script in a single file by using the tag:
+
+> --#EVENT [<service_alias>] <event_type>
+
+Example: [./services/default.lua](./services/default.lua)
+
 ```lua
---#EVENT <service_alias> <event_type>
--- Custom logic goes here
+--#EVENT scripts echo
+return data
 ```
 
-**Example: [./services/yyy/xxx.lua](./services/yyy/xxx.lua)**
+If the <service_alias> is omitted, the file name is used.
+
+Example: [./services/config.lua](./services/config.lua)
 
 ```lua
---#EVENT user account
-print(event.email)
-
---#EVENT timer timer
-print(request.message)
+--#EVENT fallback
+print(context, event)
 ```
 
-If the EVENT tag is missing the file structure is used to represent the service and event as follows.<br>`./services/<service_alias>_<event_type>.lua`
+###### Using <script_key> instead of <service_alias>
 
-**Examples: [./services/user_account.lua](./services/user_account.lua)**
+If the <service_alias> value is not an existing service reference, the eventhandler will still be created using the provide value as 'script_key'.
+If a service is later added to the solution with a matching 'script_key' the eventhandler script will be automatically linked to the service.
 
-```lua
-print(event.email)
-```
 
 Find more information regarding eventhandlers on the [Murano Scripting Reference](http://docs.exosite.com/articles/working-with-apis/#script-execution).
 
