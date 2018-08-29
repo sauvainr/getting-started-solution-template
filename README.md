@@ -1,6 +1,6 @@
 # Getting Started Solution Template
 
-touch test 2
+touch test 2 3
 
 This page describes the project structure used to set and update a Murano Solution. Murano templates can be used in two distinct ways:
 - To synchronize an existing Murano solution with a local project folder using the [Murano-CLI](http://docs.exosite.com/development/tools/murano-cli/).
