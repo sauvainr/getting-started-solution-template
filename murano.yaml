@@ -24,26 +24,9 @@ info:
 #
 # Examples follow.
 #
-####
-
-assets:
-  location: assets
-  include: '**/*'
-  exclude: ['**/.*']
-  default_page: index.html
-
-endpoints:
-  location: endpoints
-  include: '**/*.lua'
-  exclude: ['*_test.lua', '*_spec.lua']
-  cors: {'origin': ['http://localhost:*']}
+###
 
 modules:
   location: modules
-  include: '**/*.lua'
-  exclude: ['*_test.lua', '*_spec.lua']
-
-services: # Also applies for service configuration using .yaml format.
-  location: services
   include: '**/*.lua'
   exclude: ['*_test.lua', '*_spec.lua']
