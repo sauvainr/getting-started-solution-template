@@ -47,5 +47,3 @@ services: # Also applies for service configuration using .yaml format.
   location: services
   include: '**/*.lua'
   exclude: ['*_test.lua', '*_spec.lua']
-
-init_script: init.lua
